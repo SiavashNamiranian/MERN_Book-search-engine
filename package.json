@@ -1,5 +1,5 @@
 {
-  "name": "googlebooks-app",
+  "name": "MERN_Booksearchengine",
   "version": "1.0.0",
   "description": "",
   "main": "server/server.js",
@@ -14,5 +14,8 @@
   "license": "ISC",
   "devDependencies": {
     "concurrently": "^8.2.0"
+  },
+  "dependencies": {
+    "@apollo/server": "^4.9.3"
   }
 }
