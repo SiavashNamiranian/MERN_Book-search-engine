@@ -1,8 +1,8 @@
 const express = require('express');
 
-const { ApolloServer } = require('@apollo/server');//added//
+const { ApolloServer } = require('@apollo/server');
 
-const { expressMiddleware } = require('@apollo/server/express4');//added//
+const { expressMiddleware } = require('@apollo/server/express4');
 
 const path = require('path');
 const db = require('./config/connection');
@@ -11,14 +11,14 @@ const routes = require('./routes');
 
 const PORT = process.env.PORT || 3001 || 'mongodb://127.0.0.1:27017/MERN_Booksearchengine' ;
 
-const app = express();
+
 
 const server = new ApolloServer({
   typeDefs,
   resolvers,
 });
 
-
+const app = express();
 
 const startApolloServer = async () => {
   await server.start();
