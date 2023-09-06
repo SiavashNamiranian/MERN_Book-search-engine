@@ -13,10 +13,12 @@ const PORT = process.env.PORT || 3001 || 'mongodb://127.0.0.1:27017/MERN_Booksea
 
 
 
-const server = new ApolloServer({
-  typeDefs,
-  resolvers,
-});
+const server = new ApolloServer(
+  // {
+  // typeDefs,
+  // resolvers,
+// }
+);
 
 const app = express();
 
