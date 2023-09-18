@@ -1,36 +1,33 @@
 const typeDefs = `
-  type School {
-    _id: ID
-    name: String
-    location: String
-    studentCount: Int
-    classes: [Class]
-  }
-
-  type Class {
-    _id: ID
-    name: String
-    building: String
-    creditHours: Int
-    professor: Professor
-  }
-
-  type Professor {
-    _id: ID
-    name: String
-    officeHours: String
-    officeLocation: String
-    studentScore: Float
-    classes: [Class]
-  }
-
-  type Query {
-    schools: [School]
-    classes: [Class]
-    professors: [Professor]
-    # Define a query with an ID parameter to return a single Class object
-    class(id: ID!): Class
-  }
+type User {
+  _id: ID
+  username: String
+  email: String
+  password: String
+  savedBooks: [Book]!
+}
+type Book {
+  _id: ID
+  authors: String
+  description: String
+  bookId: String
+  image: String
+  link: String
+  title: String
+}
+type Auth {
+  token: ID!
+  user: User
+}
+type Query {
+  me: User
+}
+type Mutation {
+  addUser(username: String!, email: String!, password: String!): Auth
+  login(email: String!, password: String!): Auth
+  saveBook(authors: [String]!, description: String!, bookId: String!, image: String!, link: String!): User
+  deletBook(bookId: bookId!): User
+}
 `;
 
 module.exports = typeDefs;

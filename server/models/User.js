@@ -22,14 +22,22 @@ const userSchema = new Schema(
       required: true,
     },
     // set savedBooks to be an array of data that adheres to the bookSchema
-    savedBooks: [bookSchema],
+    savedBooks: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: 'Book',
+    }
+  ]
+    
+    
+    // [bookSchema],
   },
   // set this to use virtual below
-  {
-    toJSON: {
-      virtuals: true,
-    },
-  }
+  // {
+  //   toJSON: {
+  //     virtuals: true,
+  //   },
+  // }
 );
 
 // hash user password
