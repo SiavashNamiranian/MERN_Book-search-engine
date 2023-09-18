@@ -35,6 +35,7 @@ export const SAVE_BOOK = gql`
       link
       title
     }
+  }
 `;
 export const REMOVE_BOOK = gql`
   mutation removeBook($bookId: String!) {
@@ -47,4 +48,5 @@ export const REMOVE_BOOK = gql`
       link
       title
     }
+  }
 `;
