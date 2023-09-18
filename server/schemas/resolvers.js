@@ -61,6 +61,8 @@ const resolvers = {
 
 deletBook: async (parent, { bookId }, context) => {
   if (context.user) {
+    const book = await Book.findOneAndDelete(
+      {bookId: bookId});
    
     const user = await User.findOneAndUpdate(
        { _id: (context.user._id)},
