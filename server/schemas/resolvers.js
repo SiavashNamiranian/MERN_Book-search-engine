@@ -4,13 +4,21 @@ const {ObjectId} = require('mongoose').Types
 
 const resolvers = {
   Query: {
+    // user: async (parent, { username }) => {
+    //   return User.findOne({ username }).populate('savedBooks');
+    // },
     me: async (parent, args, context) => {
       if (context.user) {
         return User.findOne({ _id: context.user._id }).populate('savedBooks');
       }
       throw AuthenticationError;
     },
+    // savedBooks: async (parent, { username }) => {
+    //   const params = username ? {ratingAuthor: username} : {};
+    //   return Book.find(params).sort({ createdAt: -1 });
+    // },
   },
+  
 
 
 
@@ -44,33 +52,33 @@ const resolvers = {
 
     saveBook: async (parent, { authors, description, title, bookId, image, link}, context) => {
       if (context.user) {
-    const updatedUser = await User.findOneAndUpdate(
-      { _id: user._id},
-      { $addToSet:
-        { savedBooks: {authors, description, title, bookId, image, link } }
-      },
-      { new: true, runValidators: true }
-    );
+        const updatedUser = await User.findOneAndUpdate(
+        { _id: (context.user._id)},
+        { $addToSet:
+         { savedBooks: {authors, description, title, bookId, image, link } }
+        },
+        { new: true, runValidators: true }
+       );
 
-    return updatedUser;
-  }
-  throw AuthenticationError;
-  ('You need to be logged in!');
-},
+          return updatedUser;
+      }
+      throw AuthenticationError;
+      ('You need to be logged in!');
+    },
 
 
-deletBook: async (parent, { bookId }, context) => {
-  if (context.user) {
-    const user = await User.findOneAndUpdate(
+    removeBook: async (parent, { bookId }, context) => {
+    if (context.user) {
+      const user = await User.findOneAndUpdate(
        { _id: (context.user._id)},
        { $pull: { savedBooks: { bookId: bookId } } }
       );
 
-  return user ;
-}
-throw AuthenticationError;
-('You need to be logged in!');
-},
+      return user ;
+    }
+    throw AuthenticationError;
+    ('You need to be logged in!');
+    },
 
   },
 };
