@@ -39,7 +39,8 @@ const SearchBooks = () => {
 
 
 
-  const [saveBook, { error }] = useMutation(SAVE_BOOK);
+  const [saveBook, { error }] = useMutation(SAVE_BOOK,
+    );
 
   // create method to search for books and set state on form submit
   const handleFormSubmit = async (event) => {
@@ -88,33 +89,35 @@ const SearchBooks = () => {
     // find the book in `searchedBooks` state by the matching id
     const bookToSave = searchedBooks.find((book) => book.bookId === bookId);
       const {data} = await saveBook({
-        variables:{
+        variables: {
           authors,
           description,
           bookId,
+          title,
           image,
           link,
-          title,
         },
-      }, setSavedBookIds([...savedBookIds, bookToSave.bookId]));
+      });
+       
+    setSavedBookIds([...savedBookIds, bookToSave.bookId]);
 
      if (bookToSave.authors){
-      setAuthors(bookToSave.authors.value)
-     }
+      setAuthors(bookToSave.authors.value);
+     };0
      if (bookToSave.description){
-      setDescription(bookToSave.description.value)
+      setDescription(bookToSave.description.value);
      }
      if (bookToSave.bookId){
-      setBookId(bookToSave.bookId.value)
+      setBookId(bookToSave.bookId.value);
      }
      if (bookToSave.image){
-      setImage(bookToSave.image.value)
+      setImage(bookToSave.image.value);
      }
      if (bookToSave.link){
-      setLink(bookToSave.link.value)
+      setLink(bookToSave.link.value);
      }
      if (bookToSave.title){
-      setTitle(bookToSave.title.value)
+      setTitle(bookToSave.title.value);
      }
 
       // const response = await saveBook(bookToSave, token);

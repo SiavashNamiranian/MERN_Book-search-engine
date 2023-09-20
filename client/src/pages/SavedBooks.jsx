@@ -100,6 +100,11 @@ const SavedBooks = () => {
     }
   };
 
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
   // if data isn't here yet, say so
   if (!userDataLength) {
     return <h2>loading...</h2>;
