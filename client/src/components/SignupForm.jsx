@@ -60,11 +60,11 @@ const SignupForm = () => {
   return (
     <>
       {/* This is needed for the validation functionality above */}
-      <Form noValidate validated={validated} onSubmit={handleFormSubmit}>
+      <Form /*noValidate validated={validated}*/ onSubmit={handleFormSubmit}>
         {/* show alert if server response is bad */}
-        <Alert dismissible onClose={() => setShowAlert(false)} show={showAlert} variant='danger'>
+        {/* <Alert dismissible onClose={() => setShowAlert(false)} show={showAlert} variant='danger'>
           Something went wrong with your signup!
-        </Alert>
+        </Alert> */}
 
         <Form.Group className='mb-3'>
           <Form.Label htmlFor='username'>Username</Form.Label>
