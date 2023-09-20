@@ -24,6 +24,13 @@ const SearchBooks = () => {
   // create state to hold saved bookId values
   const [savedBookIds, setSavedBookIds] = useState(getSavedBookIds());
 
+  const [authors, setAuthors] = useState('');
+  const [description, setDescription] = useState('');
+  const [bookId, setBookId] = useState('');
+  const [title, setTitle] = useState('');
+  const [image, setImage] = useState('');
+  const [link, setLink] = useState('');
+
   // set up useEffect hook to save `savedBookIds` list to localStorage on component unmount
   // learn more here: https://reactjs.org/docs/hooks-effect.html#effects-with-cleanup
   useEffect(() => {
@@ -76,20 +83,39 @@ const SearchBooks = () => {
         if (!token) {
           return `need to be logged in to save your desired book`;
         }
-    // find the book in `searchedBooks` state by the matching id
-    const {bookToSave} = searchedBooks.find((book) => book.bookId === bookId);
+
     try {
-      const {bookToSave} = await saveBook({
+    // find the book in `searchedBooks` state by the matching id
+    const bookToSave = searchedBooks.find((book) => book.bookId === bookId);
+      const {data} = await saveBook({
         variables:{
           authors,
           description,
           bookId,
           image,
-          link
+          link,
+          title,
         },
-      }, setSavedBookIds([...bookToSave, bookToSave.bookId]));
+      }, setSavedBookIds([...savedBookIds, bookToSave.bookId]));
 
-     
+     if (bookToSave.authors){
+      setAuthors(bookToSave.authors.value)
+     }
+     if (bookToSave.description){
+      setDescription(bookToSave.description.value)
+     }
+     if (bookToSave.bookId){
+      setBookId(bookToSave.bookId.value)
+     }
+     if (bookToSave.image){
+      setImage(bookToSave.image.value)
+     }
+     if (bookToSave.link){
+      setLink(bookToSave.link.value)
+     }
+     if (bookToSave.title){
+      setTitle(bookToSave.title.value)
+     }
 
       // const response = await saveBook(bookToSave, token);
 

@@ -31,13 +31,13 @@ const userSchema = new Schema(
     
     
     // [bookSchema],
-  }
+  },
   // set this to use virtual below
-  // {
-  //   toJSON: {
-  //     virtuals: true,
-  //   },
-  // }
+  {
+    toJSON: {
+      virtuals: true,
+    },
+  }
 );
 
 // hash user password
