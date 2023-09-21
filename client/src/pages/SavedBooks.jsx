@@ -22,7 +22,7 @@ const SavedBooks = () => {
   let { loading , data, refetch } = useQuery(GET_ME, {
     variables: { username: userParam },
   }); 
-
+  const user = data?.me || [];
 
   const [userData, setUserData] = useState({});
 
@@ -31,8 +31,6 @@ const SavedBooks = () => {
 
   if (Auth.loggedIn() && Auth.getProfile().data.username === userParam) {
  
-  const user = data?.me || [];
-
   setUserData(user);
 
   useEffect (() => {
@@ -100,10 +98,6 @@ const SavedBooks = () => {
     }
   };
 
-
-  if (loading) {
-    return <div>Loading...</div>;
-  }
 
   // if data isn't here yet, say so
   if (!userDataLength) {
